@@ -26,37 +26,55 @@ public class Jdbc extends CordovaPlugin {
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		try {
+			Log.e("Jdbc-Cordova", action);
+			
 			if (action.equals("open")) {
 				if (android.os.Build.VERSION.SDK_INT > 9) {
 					StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 							.permitAll().build();
 					StrictMode.setThreadPolicy(policy);
+					Log.e("Jdbc-Cordova", "Setting policy as strict");
 				}
+				
+				Log.e("Jdbc-Cordova", "Getting args");
 				JSONObject myArg = args.getJSONObject(0);
 				int timeOut = 20;
+				Log.e("Jdbc-Cordova", "Getting timeout");
 				if(myArg.has("timeOut")) {
 					timeOut = myArg.getInt("timeOut");
 				}
+				Log.e("Jdbc-Cordova", "Getting other args");
 				String url = myArg.getString("url");
 				// "jdbc:jtds:sqlserver://server/database";
 				String user = myArg.getString("user");// "user";
 				String password = myArg.getString("password");// "pass";
+				Log.e("Jdbc-Cordova", url);
+				Log.e("Jdbc-Cordova", user);
+				Log.e("Jdbc-Cordova", password);
 				try {
 					// Class.forName("com.mysql.jdbc.Driver");
 					// Class.forName("net.sourceforge.jtds.jdbc.Driver");
+					Log.e("Jdbc-Cordova", myArg.getString("class"));
 					Class.forName(myArg.getString("class")).newInstance();
 					DriverManager.setLoginTimeout(timeOut);
+					Log.e("Jdbc-Cordova", "Trying ...");
 					con = DriverManager.getConnection(url, user, password);
+					Log.e("Jdbc-Cordova", "Done");
 				} catch (java.lang.ClassNotFoundException e) {
+					Log.e("Jdbc-Cordova", "ex1");
 					callbackContext.error(e.getLocalizedMessage());
 					return true;
 				} catch (SQLException e) {
+					Log.e("Jdbc-Cordova", "ex2");
 					callbackContext.error(e.getLocalizedMessage());
 					return true;
 				} catch (Exception e) {
+					Log.e("Jdbc-Cordova", "ex3");
 					callbackContext.error(e.getLocalizedMessage());
 					return true;
 				}
+				
+				Log.e("Jdbc-Cordova", "exit");
 				callbackContext.success();
 				return true;
 
