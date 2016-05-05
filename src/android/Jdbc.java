@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import android.util.Log;
+
 public class Jdbc extends CordovaPlugin {
 
 	private Connection con = null;
