@@ -1,7 +1,8 @@
-package org.apache.cordova.plugin;
+package com.lizardsc.plugins;
 
-import org.apache.cordova.api.CallbackContext;
-import org.apache.cordova.api.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaPlugin;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,8 +24,7 @@ public class Jdbc extends CordovaPlugin {
 	}
 
 	@Override
-	public boolean execute(String action, final JSONArray args,
-			final CallbackContext callbackContext) throws JSONException {
+	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		try {
 			if (action.equals("open")) {
 				if (android.os.Build.VERSION.SDK_INT > 9) {

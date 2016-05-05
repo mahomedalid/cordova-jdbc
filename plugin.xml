@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="com.lizardsc.plugins.jdbc" version="0.3.0">
+    <name>JDBC</name>
+    <description>JDBC for Cordova Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,jdbc</keywords>
+    <js-module src="www/jdbc.js" name="jdbc">
+        <clobbers target="jdbc" />
+    </js-module>
+    <platform name="android">
+		<config-file target="config.xml" parent="/*">
+			<feature name="JDBCPlugin">
+				<param name="android-package" value="com.lizardsc.plugins.Jdbc" />
+			</feature>
+		</config-file>
+		 <source-file src="src/android/Jdbc.java" target-dir="src/com/lizardsc/plugins" />
+	</platform>
+</plugin>
